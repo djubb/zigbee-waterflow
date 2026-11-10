@@ -27,10 +27,15 @@ static flow_channel_t channels[] = {
 #define CHANNEL_COUNT (sizeof(channels) / sizeof(channels[0]))
 
 // Arms one PCNT unit to count rising edges from a YF-B5's open-collector
-// pulse output. Internal pull-up is enabled in addition to the external
-// pull-up resistor called for in the README - belt and suspenders, since a
-// missing/weak external pull-up would otherwise read as a permanently "high
-// flow" floating input rather than a clean zero.
+// pulse output. gpio_set_pull_mode() here is actually redundant - confirmed
+// on the bench that pcnt_new_channel() below already puts edge_gpio_num in
+// input mode with its own internal pull-up - but it's left in as an explicit,
+// self-documenting statement of intent. An external pull-up resistor
+// (several kOhm) is optional, recommended only for long/noisy wiring runs
+// (see README) - it is NOT required for the internal pull-up to work, and
+// critically must not be anywhere near as low as 10 Ohm (as opposed to
+// 10 kOhm): that overpowers both the sensor's open-collector output and the
+// internal pull-up, pinning the line permanently high.
 static void setup_channel(flow_channel_t *ch)
 {
     gpio_set_direction(ch->gpio, GPIO_MODE_INPUT);
