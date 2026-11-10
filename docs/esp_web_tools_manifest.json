@@ -1,0 +1,15 @@
+{
+    "name": "Zigbee Датчик Потока Воды (2x YF-B5)",
+    "version": "1",
+    "home_assistant_domain": "zha",
+    "new_install_prompt_erase": true,
+    "new_install_improv_wait_time": 0,
+    "builds": [
+        {
+            "chipFamily": "ESP32-C6",
+            "parts": [
+                { "path": "bin_latest/waterflow_esp32c6.bin", "offset": 0 }
+            ]
+        }
+    ]
+}
