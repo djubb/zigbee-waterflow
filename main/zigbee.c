@@ -12,8 +12,8 @@ static const char *TAG = "zigbee";
 // zcl_general_commands.c:612 on this esp-zigbee-lib version, regardless of
 // reporting-table setup or the manuf_code field - so actual report cadence
 // is whatever ZHA negotiates (its own Configure Reporting during pairing
-// can override our configured default), not guaranteed to match
-// REPORT_INTERVAL_MS exactly.
+// can override our configured default), not guaranteed to match the
+// configured report interval exactly.
 void reportAttribute(uint8_t endpoint, uint16_t clusterID, uint16_t attributeID, void *value)
 {
     // The Zigbee stack runs in its own task - any call into esp-zigbee-lib

@@ -3,6 +3,11 @@ dependencies:
   espressif/esp-zigbee-lib: "~1.6.0"
   espressif/esp-zboss-lib: "~1.6.0"
   espressif/led_strip: "~2.5.0"
+  espressif/onewire_bus: "^1.1.1"
+  # pinned below 0.4.0: that release adds an optional dependency on
+  # "sensor_hub" guarded by an `if: $CONFIG{...}` clause, which the component
+  # manager bundled with ESP-IDF v5.3 (used by CI) can't parse yet
+  espressif/ds18b20: "0.3.1"
   ## Required IDF version
   idf:
     version: ">=5.0.0"

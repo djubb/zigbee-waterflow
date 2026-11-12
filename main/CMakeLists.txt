@@ -4,6 +4,7 @@ idf_component_register(
     "zigbee.c"
     "zigbee_task.c"
     "flow_task.c"
+    "ds18b20_task.c"
     INCLUDE_DIRS "."
-    REQUIRES "nvs_flash" "driver"
+    REQUIRES "nvs_flash" "driver" "onewire_bus" "ds18b20"
 )

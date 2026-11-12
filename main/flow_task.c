@@ -82,10 +82,10 @@ void flow_task(void *pvParameters)
         setup_channel(&channels[i]);
     }
 
-    const float minutes_per_interval = REPORT_INTERVAL_MS / 60000.0f;
+    const float minutes_per_interval = FLOW_REPORT_INTERVAL_MS / 60000.0f;
 
     while (1) {
-        vTaskDelay(REPORT_INTERVAL_MS / portTICK_PERIOD_MS);
+        vTaskDelay(FLOW_REPORT_INTERVAL_MS / portTICK_PERIOD_MS);
 
         for (uint8_t i = 0; i < CHANNEL_COUNT; i++) {
             flow_channel_t *ch = &channels[i];

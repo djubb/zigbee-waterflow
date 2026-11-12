@@ -1,5 +1,5 @@
 {
-    "name": "Zigbee Датчик Потока Воды (2x YF-B5)",
+    "name": "Zigbee Датчик Потока и Температуры (2x YF-B5 + DS18B20)",
     "version": "1",
     "home_assistant_domain": "zha",
     "new_install_prompt_erase": true,

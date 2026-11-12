@@ -12,6 +12,7 @@
 static const char *TAG = "WATERFLOW";
 
 TaskHandle_t xFlowTask;
+TaskHandle_t xDs18b20Task;
 TaskHandle_t xZigbeeTask;
 
 static void bdb_start_top_level_commissioning_cb(uint8_t mode_mask)
@@ -24,6 +25,7 @@ static void start_sensor_reporting(void)
     static bool started = false;
     if (!started) {
         xTaskCreate(flow_task, "flow_task", 4096, NULL, 5, &xFlowTask);
+        xTaskCreate(ds18b20_task, "ds18b20_task", 4096, NULL, 5, &xDs18b20Task);
         started = true;
     }
 }
@@ -121,5 +123,7 @@ void app_main(void)
     };
     ESP_ERROR_CHECK(nvs_flash_init());
     ESP_ERROR_CHECK(esp_zb_platform_config(&config));
+    /* scan the 1-Wire bus once, before the Zigbee stack starts up */
+    ds18b20_scan_bus();
     xTaskCreate(esp_zb_task, "Zigbee_main", 4096, NULL, 5, &xZigbeeTask);
 }
